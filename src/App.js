@@ -1,18 +1,21 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useState } from 'react'
 
 import EmailInput from './components/EmailInput'
 import CheckboxInput from './components/CheckboxInput'
 import RadioInput from './components/RadioInput'
+import Accordion from './components/Accordion'
 import { reducer, initialState } from './services/formState'
 import './styles/App.sass'
 
 const App = () => {
+  const [formState, updateFormState] = useReducer(reducer, initialState)
   const handleFormSubmit = evt => {
     evt.preventDefault()
     console.log(formState)
   }
 
-  const [formState, updateFormState] = useReducer(reducer, initialState)
+  const [isAccordionExpanded, setIsAccordionExpanded] = useState(false)
+  const toggleAccordion = () => setIsAccordionExpanded(!isAccordionExpanded)
 
   return (
     <div className="App">
@@ -41,8 +44,23 @@ const App = () => {
             checked={formState.consent}
             required
           >
-            Age > 16?
+            Age > 16
+            {!isAccordionExpanded && (
+              <span
+                className="accordion-button"
+                onClick={toggleAccordion}
+                aria-label="more info"
+              >
+                ?
+              </span>
+            )}
           </CheckboxInput>
+
+          <Accordion
+            msg="Must be over 16"
+            expanded={isAccordionExpanded}
+            toggle={toggleAccordion}
+          />
 
           <CheckboxInput
             name="newsletter"

@@ -1,0 +1,30 @@
+.accordion-container
+  overflow: hidden
+  height: 0px
+  margin: 0px 20px
+  transition: all .25s ease
+
+  .accordion-hide
+    padding: 0 10px
+    float: right
+    cursor: pointer
+    text-decoration: underline
+
+    &:hover
+      color: orange
+      font-weight: bold
+
+
+  &.revealed
+    margin: 20px
+    height: auto
+    margin-bottom: 40px
+
+.accordion-button
+  cursor: pointer
+  text-decoration: underline
+  padding: 0 6px
+
+  &:hover
+    font-weight: bold
+    color: orange
