@@ -13,6 +13,7 @@ const EmailInput = ({
       {required ? <span className="required">*</span> : ''}
     </label>
     <input
+      type="email"
       name={name}
       aria-labelledby={`${name}-label`}
       onChange={evt => handleInputChange(evt.target)}
