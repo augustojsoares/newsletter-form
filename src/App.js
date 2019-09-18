@@ -6,6 +6,7 @@ import RadioInput from './components/RadioInput'
 import Accordion from './components/Accordion'
 import { reducer, initialState, initialErrorState, isEmail } from './services/formState'
 import { getLang, I18n } from './services/i18n'
+import API from './services/api'
 import './styles/App.sass'
 
 const App = () => {
@@ -39,8 +40,13 @@ const App = () => {
   
   const handleFormSubmit = evt => {
     evt.preventDefault()
-    validateEmail()
-    validateConsent()
+    const canSubmit = validateEmail() && validateConsent()
+
+    if (canSubmit) {
+      API.subscribeToService(formState)
+        .then(response => console.log(response))
+        .catch(err => console.error(err))
+    }
   }
 
   const [isAccordionExpanded, setIsAccordionExpanded] = useState(false)
