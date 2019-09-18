@@ -1,10 +1,12 @@
 import React from 'react'
+import Error from './Error'
 
 const CheckboxInput = ({
   name='checkbox',
   children='',
   handleInputChange,
-  required=false,
+  required = false,
+  error='',
   ...rest
 }) => (
   <fieldset className="form-group">
@@ -25,6 +27,7 @@ const CheckboxInput = ({
       {children}
       {required ? <span className="required">*</span> : ''}
     </label>
+    <Error msg={error} />
   </fieldset>
 )
 

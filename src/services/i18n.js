@@ -9,7 +9,10 @@ const TRANSLATIONS = {
     title: 'Subscribe to the mailing list',
     emailPlaceholder: 'Enter your email address',
     emailLabel: 'Email',
+    emailErrorEmpty: 'You must provide an email address',
+    emailErrorInvalid: 'Invalid email address',
     consentLabel: 'Yes, I am over __ years old',
+    consentErrorEmpty: 'You\'re not the minimum age required to subscribe',
     accordionMessage:
       'By law, you must be at least __ years old to subscribe to this newsletter',
     openAccordionLabel: 'more info',
@@ -25,7 +28,10 @@ const TRANSLATIONS = {
     title: 'Abonnieren Sie die Mailingliste',
     emailPlaceholder: 'Geben sie ihre E-Mailadresse ein',
     emailLabel: 'Email',
+    emailErrorEmpty: 'Sie müssen eine E-Mail-Adresse angeben',
+    emailErrorInvalid: 'Ungültige E-Mail-Adresse',
     consentLabel: 'Ja, ich bin über __ Jahre alt',
+    consentErrorEmpty: 'Sie sind nicht das Mindestalter, um sich anzumelden',
     accordionMessage:
       'Laut Gesetz müssen Sie mindestens __ Jahre alt sein, um diesen Newsletter zu abonnieren',
     openAccordionLabel: 'Mehr Info',

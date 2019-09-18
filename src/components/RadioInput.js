@@ -1,4 +1,5 @@
 import React from 'react'
+import Error from './Error'
 
 const RadioInput = ({
   name='radio',
@@ -6,7 +7,8 @@ const RadioInput = ({
   options,
   selected='',
   handleInputChange,
-  required=false,
+  required = false,
+  error=''
 }) => (
   <fieldset className="form-group stacked">
     <legend>
@@ -27,6 +29,7 @@ const RadioInput = ({
         <label id={`${name}-${identifier}-label`}>{label}</label>
       </div>
     ))}
+    <Error msg={error} />
   </fieldset>
 )
 

@@ -4,7 +4,7 @@ import EmailInput from './components/EmailInput'
 import CheckboxInput from './components/CheckboxInput'
 import RadioInput from './components/RadioInput'
 import Accordion from './components/Accordion'
-import { reducer, initialState } from './services/formState'
+import { reducer, initialState, initialErrorState, isEmail } from './services/formState'
 import { getLang, I18n } from './services/i18n'
 import './styles/App.sass'
 
@@ -13,17 +13,37 @@ const App = () => {
   const i18n = I18n(lang)
 
   const [formState, updateFormState] = useReducer(reducer, initialState)
+  const [formErrorState, updateFormErrorState] = useReducer(reducer, initialErrorState)
+
+  const validateEmail = () => {
+    if (!formState.email) {
+      updateFormErrorState({ name: 'email', value: i18n.t('emailErrorEmpty') })
+      return false
+    }
+    if (!isEmail(formState.email)) {
+      updateFormErrorState({ name: 'email', value: i18n.t('emailErrorInvalid') })
+      console.log('aqui');
+      return false
+    }
+    return true
+  }
+
+  const validateConsent = () => {
+    if (!formState.consent) {
+      updateFormErrorState({ name: 'consent', value: i18n.t('consentErrorEmpty') })
+      return false
+    }
+    return true
+  }
+  
   const handleFormSubmit = evt => {
     evt.preventDefault()
-    console.log(formState)
+    validateEmail()
+    validateConsent()
   }
 
   const [isAccordionExpanded, setIsAccordionExpanded] = useState(false)
   const toggleAccordion = () => setIsAccordionExpanded(!isAccordionExpanded)
-
-  const handleInvalidForm = (...rest) => {
-    console.log(rest);
-  }
 
   return (
     <div className="App">
@@ -35,7 +55,7 @@ const App = () => {
           className="signup-form"
           onSubmit={handleFormSubmit}
           aria-labelledby="form-title"
-          onInvalid={handleInvalidForm}
+          noValidate
         >
           <EmailInput
             name="email"
@@ -43,6 +63,7 @@ const App = () => {
             handleInputChange={updateFormState}
             value={formState.email}
             required
+            error={formErrorState.email}
           >
             {i18n.t('emailLabel')}
           </EmailInput>
@@ -52,6 +73,7 @@ const App = () => {
             handleInputChange={updateFormState}
             checked={formState.consent}
             required
+            error={formErrorState.consent}
           >
             {i18n.t('consentLabel', i18n.config('ageOfConsent'))}
             {!isAccordionExpanded && (

@@ -1,10 +1,12 @@
 import React from 'react'
+import Error from './Error'
 
 const EmailInput = ({
   name='email',
   children='Email',
   handleInputChange,
-  required=false,
+  required = false,
+  error='',
   ...rest
 }) => (
   <fieldset className="form-group" key={name}>
@@ -19,7 +21,8 @@ const EmailInput = ({
       onChange={evt => handleInputChange(evt.target)}
       required={required}
       {...rest}
-    />
+      />
+      <Error msg={error} />
   </fieldset>
 )
 
