@@ -4,7 +4,12 @@ import EmailInput from './components/EmailInput'
 import CheckboxInput from './components/CheckboxInput'
 import RadioInput from './components/RadioInput'
 import Accordion from './components/Accordion'
-import { reducer, initialState, initialErrorState, isEmail } from './services/formState'
+import {
+  reducer,
+  initialState,
+  initialErrorState,
+  isEmail,
+} from './services/formState'
 import { getLang, I18n } from './services/i18n'
 import API from './services/api'
 import './styles/App.sass'
@@ -15,7 +20,10 @@ const App = () => {
   window.i18n = i18n
 
   const [formState, updateFormState] = useReducer(reducer, initialState)
-  const [formErrorState, updateFormErrorState] = useReducer(reducer, initialErrorState)
+  const [formErrorState, updateFormErrorState] = useReducer(
+    reducer,
+    initialErrorState
+  )
 
   const validateEmail = () => {
     if (!formState.email) {
@@ -23,8 +31,11 @@ const App = () => {
       return false
     }
     if (!isEmail(formState.email)) {
-      updateFormErrorState({ name: 'email', value: i18n.t('emailErrorInvalid') })
-      console.log('aqui');
+      updateFormErrorState({
+        name: 'email',
+        value: i18n.t('emailErrorInvalid'),
+      })
+      console.log('aqui')
       return false
     }
     return true
@@ -32,12 +43,15 @@ const App = () => {
 
   const validateConsent = () => {
     if (!formState.consent) {
-      updateFormErrorState({ name: 'consent', value: i18n.t('consentErrorEmpty') })
+      updateFormErrorState({
+        name: 'consent',
+        value: i18n.t('consentErrorEmpty'),
+      })
       return false
     }
     return true
   }
-  
+
   const handleFormSubmit = evt => {
     evt.preventDefault()
     const canSubmit = validateEmail() && validateConsent()
@@ -55,7 +69,7 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header" id="form-title">
-      {i18n.t('title')}
+        {i18n.t('title')}
       </header>
       <main>
         <form

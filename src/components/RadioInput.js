@@ -2,13 +2,13 @@ import React from 'react'
 import Error from './Error'
 
 const RadioInput = ({
-  name='radio',
-  children='',
+  name = 'radio',
+  children = '',
   options,
-  selected='',
+  selected = '',
   handleInputChange,
   required = false,
-  error=''
+  error = '',
 }) => (
   <fieldset className="form-group stacked">
     <legend>
@@ -22,9 +22,7 @@ const RadioInput = ({
           name={identifier}
           aria-labelledby={`${name}-${identifier}-label`}
           checked={selected === identifier}
-          onChange={evt =>
-            handleInputChange({ name, value: evt.target.name })
-          }
+          onChange={evt => handleInputChange({ name, value: evt.target.name })}
         />
         <label id={`${name}-${identifier}-label`}>{label}</label>
       </div>

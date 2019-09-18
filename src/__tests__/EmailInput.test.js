@@ -3,19 +3,13 @@ import { render, fireEvent, cleanup } from '@testing-library/react'
 
 import EmailInput from '../components/EmailInput'
 
-let container = null;
+let container = null
 const handle = jest.fn()
 beforeEach(() => {
-  container = render(
-    <EmailInput
-      handleInputChange={handle}
-    >
-      Email
-    </EmailInput>
-  )
-});
+  container = render(<EmailInput handleInputChange={handle}>Email</EmailInput>)
+})
 
-afterEach(cleanup);
+afterEach(cleanup)
 
 it('should render', () => {
   expect(container.getByLabelText('Email')).toBeTruthy()
@@ -24,7 +18,7 @@ it('should render', () => {
 it('should trigger input handler on change', () => {
   expect(handle).not.toHaveBeenCalled()
   const input = container.getByLabelText('Email')
-  
+
   fireEvent.change(input, { target: { value: 'mail@mail.com' } })
 
   expect(handle).toHaveBeenCalled()
@@ -32,7 +26,7 @@ it('should trigger input handler on change', () => {
 
 it('should update value on change', () => {
   const input = container.getByLabelText('Email')
-  
+
   fireEvent.change(input, { target: { value: 'mail@mail.com' } })
   expect(input.value).toBe('mail@mail.com')
 })

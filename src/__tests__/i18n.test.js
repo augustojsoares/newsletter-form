@@ -23,25 +23,28 @@ it('correctly returns configs', () => {
 
 it('properly replaces translation variables', () => {
   const i18n = I18n(getLang())
-  expect(i18n.t('consentLabel', i18n.config('ageOfConsent'))).toBe('Yes, I am over 18 years old')
+  expect(i18n.t('consentLabel', i18n.config('ageOfConsent'))).toBe(
+    'Yes, I am over 18 years old'
+  )
 })
 
 it('correctly handles multiple variables', () => {
   const i18n = I18n(getLang(), {
     'en-US': {
-      variablesTest: 'this is a __ with __ __ in it'
-    }
+      variablesTest: 'this is a __ with __ __ in it',
+    },
   })
-  expect(i18n.t('variablesTest', 'test', 'multiple', 'variables'))
-    .toBe('this is a test with multiple variables in it')
+  expect(i18n.t('variablesTest', 'test', 'multiple', 'variables')).toBe(
+    'this is a test with multiple variables in it'
+  )
 })
 
 it('returns existing fallback translation when main not available', () => {
   const i18n = I18n('de-DE', {
     'en-US': {
-      test: 'this is a test'
+      test: 'this is a test',
     },
-    'de-DE': {}
+    'de-DE': {},
   })
   expect(i18n.t('test')).toBe('this is a test')
 })
@@ -49,7 +52,7 @@ it('returns existing fallback translation when main not available', () => {
 it('returns emptyValue when no translation available', () => {
   const i18n = I18n('de-DE', {
     'en-US': {},
-    'de-DE': {}
+    'de-DE': {},
   })
   expect(i18n.t('test')).toBe('')
 })
@@ -62,8 +65,8 @@ it('defaults to fallback when non supported language is passed', () => {
 it('prioritizes translations in parameters', () => {
   const i18n = I18n(getLang(), {
     'en-US': {
-      title: 'this is a test'
-    }
+      title: 'this is a test',
+    },
   })
   expect(i18n.t('title')).toBe('this is a test')
 })

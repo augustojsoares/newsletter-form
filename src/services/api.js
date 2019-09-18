@@ -7,13 +7,11 @@ const API = {
       credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json',
-            
       },
       redirect: 'follow',
       referrer: 'no-referrer',
       body: JSON.stringify(body),
-    })
-      .then(response => response.json());
-  }
+    }).then(response => response.json())
+  },
 }
 export default API

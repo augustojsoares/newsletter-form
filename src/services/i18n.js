@@ -12,7 +12,7 @@ const TRANSLATIONS = {
     emailErrorEmpty: 'You must provide an email address',
     emailErrorInvalid: 'Invalid email address',
     consentLabel: 'Yes, I am over __ years old',
-    consentErrorEmpty: 'You\'re not the minimum age required to subscribe',
+    consentErrorEmpty: "You're not the minimum age required to subscribe",
     accordionMessage:
       'By law, you must be at least __ years old to subscribe to this newsletter',
     openAccordionLabel: 'more info',
@@ -82,7 +82,7 @@ export const I18n = (
     const primaryTranslations = translations[lang] || translations[fallback]
     const fallbackTranslations = translations[fallback]
 
-    // the actual tranaltion function. Tries to match the accessor string to the active language, followed by the fallback language. 
+    // the actual tranaltion function. Tries to match the accessor string to the active language, followed by the fallback language.
     // If no match, returns the empty value
     return (accessor, ...rest) => {
       let value =

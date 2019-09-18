@@ -3,25 +3,23 @@ import { render, fireEvent, cleanup } from '@testing-library/react'
 
 import RadioInput from '../components/RadioInput'
 
-let container = null;
+let container = null
 const handle = jest.fn()
 beforeEach(() => {
   container = render(
     <RadioInput
       handleInputChange={handle}
-      options={
-        [
-          {label: 'o1', identifier: 'o1'},
-          {label: 'o2', identifier: 'o2'},
-        ]
-      }
+      options={[
+        { label: 'o1', identifier: 'o1' },
+        { label: 'o2', identifier: 'o2' },
+      ]}
     >
       Radio
     </RadioInput>
   )
-});
+})
 
-afterEach(cleanup);
+afterEach(cleanup)
 
 it('should render', () => {
   expect(container.getByText('Radio')).toBeTruthy()

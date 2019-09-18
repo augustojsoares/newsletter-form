@@ -2,11 +2,11 @@ import React from 'react'
 import Error from './Error'
 
 const CheckboxInput = ({
-  name='checkbox',
-  children='',
+  name = 'checkbox',
+  children = '',
   handleInputChange,
   required = false,
-  error='',
+  error = '',
   ...rest
 }) => (
   <fieldset className="form-group">
