@@ -5,9 +5,13 @@ import CheckboxInput from './components/CheckboxInput'
 import RadioInput from './components/RadioInput'
 import Accordion from './components/Accordion'
 import { reducer, initialState } from './services/formState'
+import { getLang, I18n } from './services/i18n'
 import './styles/App.sass'
 
 const App = () => {
+  const [lang] = useState(getLang())
+  const i18n = I18n(lang)
+
   const [formState, updateFormState] = useReducer(reducer, initialState)
   const handleFormSubmit = evt => {
     evt.preventDefault()
@@ -17,25 +21,30 @@ const App = () => {
   const [isAccordionExpanded, setIsAccordionExpanded] = useState(false)
   const toggleAccordion = () => setIsAccordionExpanded(!isAccordionExpanded)
 
+  const handleInvalidForm = (...rest) => {
+    console.log(rest);
+  }
+
   return (
     <div className="App">
       <header className="App-header" id="form-title">
-        Title
+      {i18n.t('title')}
       </header>
       <main>
         <form
           className="signup-form"
           onSubmit={handleFormSubmit}
           aria-labelledby="form-title"
+          onInvalid={handleInvalidForm}
         >
           <EmailInput
             name="email"
-            placeholder="insert email"
+            placeholder={i18n.t('emailPlaceholder')}
             handleInputChange={updateFormState}
             value={formState.email}
             required
           >
-            Email
+            {i18n.t('emailLabel')}
           </EmailInput>
 
           <CheckboxInput
@@ -44,12 +53,12 @@ const App = () => {
             checked={formState.consent}
             required
           >
-            Age > 16
+            {i18n.t('consentLabel', i18n.config('ageOfConsent'))}
             {!isAccordionExpanded && (
               <span
                 className="accordion-button"
                 onClick={toggleAccordion}
-                aria-label="more info"
+                aria-label={i18n.t('openAccordionLabel')}
               >
                 ?
               </span>
@@ -57,7 +66,7 @@ const App = () => {
           </CheckboxInput>
 
           <Accordion
-            msg="Must be over 16"
+            msg={i18n.t('accordionMessage', i18n.config('ageOfConsent'))}
             expanded={isAccordionExpanded}
             toggle={toggleAccordion}
           />
@@ -67,24 +76,24 @@ const App = () => {
             handleInputChange={updateFormState}
             checked={formState.newsletter}
           >
-            Subscribe newsletter?
+            {i18n.t('newsletterMessage')}
           </CheckboxInput>
 
           <RadioInput
             handleInputChange={updateFormState}
             name="gender"
             options={[
-              { label: 'male', identifier: 'male' },
-              { label: 'female', identifier: 'female' },
-              { label: 'nonBin', identifier: 'nonBin' },
-              { label: 'other', identifier: 'other' },
+              { label: i18n.t('genderLabelMale'), identifier: 'male' },
+              { label: i18n.t('genderLabelFemale'), identifier: 'female' },
+              { label: i18n.t('genderLabelNonBin'), identifier: 'nonBin' },
+              { label: i18n.t('genderLabelOther'), identifier: 'other' },
             ]}
             selected={formState.gender}
           >
-            Gender identity
+            {i18n.t('genderTitle')}
           </RadioInput>
 
-          <button type="submit">Subscribe</button>
+          <button type="submit">{i18n.t('subscribeButton')}</button>
         </form>
       </main>
     </div>
