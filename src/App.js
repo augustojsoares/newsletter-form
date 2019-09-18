@@ -11,6 +11,7 @@ import './styles/App.sass'
 const App = () => {
   const [lang] = useState(getLang())
   const i18n = I18n(lang)
+  window.i18n = i18n
 
   const [formState, updateFormState] = useReducer(reducer, initialState)
   const [formErrorState, updateFormErrorState] = useReducer(reducer, initialErrorState)
@@ -93,27 +94,31 @@ const App = () => {
             toggle={toggleAccordion}
           />
 
-          <CheckboxInput
-            name="newsletter"
-            handleInputChange={updateFormState}
-            checked={formState.newsletter}
-          >
-            {i18n.t('newsletterMessage')}
-          </CheckboxInput>
+          {i18n.config('showNewsletter') && (
+            <CheckboxInput
+              name="newsletter"
+              handleInputChange={updateFormState}
+              checked={formState.newsletter}
+            >
+              {i18n.t('newsletterMessage')}
+            </CheckboxInput>
+          )}
 
-          <RadioInput
-            handleInputChange={updateFormState}
-            name="gender"
-            options={[
-              { label: i18n.t('genderLabelMale'), identifier: 'male' },
-              { label: i18n.t('genderLabelFemale'), identifier: 'female' },
-              { label: i18n.t('genderLabelNonBin'), identifier: 'nonBin' },
-              { label: i18n.t('genderLabelOther'), identifier: 'other' },
-            ]}
-            selected={formState.gender}
-          >
-            {i18n.t('genderTitle')}
-          </RadioInput>
+          {i18n.config('showGender') && (
+            <RadioInput
+              handleInputChange={updateFormState}
+              name="gender"
+              options={[
+                { label: i18n.t('genderLabelMale'), identifier: 'male' },
+                { label: i18n.t('genderLabelFemale'), identifier: 'female' },
+                { label: i18n.t('genderLabelNonBin'), identifier: 'nonBin' },
+                { label: i18n.t('genderLabelOther'), identifier: 'other' },
+              ]}
+              selected={formState.gender}
+            >
+              {i18n.t('genderTitle')}
+            </RadioInput>
+          )}
 
           <button type="submit">{i18n.t('subscribeButton')}</button>
         </form>

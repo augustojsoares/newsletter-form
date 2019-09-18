@@ -48,13 +48,13 @@ const TRANSLATIONS = {
 const CONFIGS = {
   'en-US': {
     ageOfConsent: 18,
-    showNewsletter: true,
+    showNewsletter: false,
     showGender: true,
   },
   'de-DE': {
     ageOfConsent: 16,
     showNewsletter: true,
-    showGender: true,
+    showGender: false,
   },
 }
 
