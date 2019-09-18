@@ -35,9 +35,9 @@ const App = () => {
         name: 'email',
         value: i18n.t('emailErrorInvalid'),
       })
-      console.log('aqui')
       return false
     }
+    updateFormErrorState({ name: 'email', value: '' })
     return true
   }
 
@@ -49,12 +49,17 @@ const App = () => {
       })
       return false
     }
+    updateFormErrorState({ name: 'consent', value: '' })
     return true
   }
 
   const handleFormSubmit = evt => {
     evt.preventDefault()
-    const canSubmit = validateEmail() && validateConsent()
+    const validators = [validateEmail, validateConsent]
+    const canSubmit = validators.reduce(
+      (acc, validator) => validator() && acc,
+      true
+    )
 
     if (canSubmit) {
       API.subscribeToService(formState)
